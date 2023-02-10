@@ -97,6 +97,100 @@ Company page complete code  -----End-----
 
 
 /* 
+Client page complete code  -----Start----- 
+ */
+//Client Add modal code --------Start------
+$('body').on('click', '.client_add_btn', function(){
+    $('.client_form_store').trigger('reset');
+    $('.zon_status_1').attr('checked', 'checked'); 
+    $('.zon_status_2').attr('checked', null);
+    $(".input_id[type=hidden]").val('');
+    $('.modal-title').html('Add New Client')
+    $('.sub_html').html('Add New Client');
+    $('#modal').modal('show');
+});
+//Client Add modal code --------End------
+
+//Client edit modal code --------Start------
+$('body').on('click', '.client_edit_btn', function(){
+    $('.client_form_store').trigger('reset');
+    $('.modal-title').html('Edit Client')
+    $('.sub_html').html('Update');
+    $('#modal').modal('show');
+    var id = $(this).data('id');
+   
+    $.ajax({
+        url: 'clients/edit/'+id
+        
+    }).done(function(res){
+        
+        $('.input_id').val(res.client_id);
+        $('.input_code').val(res.client_code);
+        $('.input_name').val(res.client_name);
+        $('.input_des').val(res.client_description);
+        if(res.client_status == 'Active'){
+            $('.cli_status_1').attr('checked', 'checked');  
+                
+            $('.cli_status_2').attr('checked', null); 
+        }else{
+            $('.cli_status_2').attr('checked', 'checked'); 
+                
+            $('.cli_status_1').attr('checked', null); 
+        }
+    })
+});
+//Client Add modal code --------End------
+
+//Client Store modal code --------Start------
+$('body').on('submit', '.client_form_store', function(e){
+    e.preventDefault();
+    $.ajax({
+        url: 'clients/store',
+        data: $('.client_form_store').serialize(),
+        type: 'POST'
+    }).done(function(res){
+        var row = '<tr class="row_table_'+res.client_id+'">';
+        row += '<td>'+res.client_id+ '</td>';
+        row += '<td>'+res.client_code+ '</td>';
+        row += '<td>'+res.client_name+'</td>';
+        row += '<td>'+res.client_description+'</td>';
+        row += '<td>'+res.client_status+'</td>';
+        row += '<td><a role="button" id="" class="client_edit_btn edit_icon_style" data-id="'+res.client_id+'"><i class="ti ti-edit"></i></a><a role="button" class="client_del_btn del_icon_style" style="margin-left:4px;" id="del_btn" data-id="'+res.client_id+'"><i class="ti ti-basket"></i></a></td>';
+        if($('.input_id').val()!=''){
+            $('.row_table_'+res.client_id).replaceWith(row);
+        }else{
+            $('.list_table').prepend(row);
+        }
+
+        $('.client_form_store').trigger('reset');
+        $('#modal').modal('hide');
+
+    });
+})
+//Client Store modal code --------End------
+
+//Client delete modal code --------Start------
+
+
+    $('body').on('click', '.client_del_btn', function(){
+        var id = $(this).data('id');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: 'clients/delete/'+id,
+            type: 'DELETE'
+        }).done(function(res){
+            $('.row_table_'+res.client_id).remove();
+        })
+    })
+//Client Delete modal code --------End------
+/* 
+Client page complete code  -----End----- 
+ */
+
+
+/* 
 Products Page javascript code  -----Start----- 
  */
 //Products Page add-modal code -----Start-----

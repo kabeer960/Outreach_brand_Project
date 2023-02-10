@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Http\Requests\ClientStoreRequest;
 
 class ClientController extends Controller
 {
@@ -17,7 +18,7 @@ class ClientController extends Controller
         return response()->json($data);
     }
     
-    function store_client(Request $req){
+    function store_client(ClientStoreRequest $req){
         if($req->client_id != ''){
             $data = Client::find($req->client_id);
         }
