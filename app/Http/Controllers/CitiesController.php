@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Country;
+use App\Http\Requests\CityStoreRequest;
 
 class CitiesController extends Controller
 {
@@ -21,7 +22,7 @@ class CitiesController extends Controller
 
     }
 
-    function store(Request $req){
+    function store(CityStoreRequest $req){
         if($req->city_id !=''){
             $data = City::find($req->city_id);
         }else{

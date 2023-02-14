@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Route;
 use App\Models\Town;
+use App\Http\Requests\RouteStoreRequest;
 
 class RoutesController extends Controller
 {
@@ -19,7 +20,7 @@ class RoutesController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(RouteStoreRequest $req){
         if($req->route_id !=''){
             $data =  Route::find($req->route_id);
 

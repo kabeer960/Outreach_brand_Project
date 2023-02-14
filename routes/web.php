@@ -19,6 +19,9 @@ use App\Http\Controllers\ShopClassesController;
 use App\Http\Controllers\ShopCategoryController;
 use App\Http\Controllers\ShopSubcategoryController;
 use App\Http\Controllers\UserroleController;
+use App\Http\Controllers\CompaignsController;
+use App\Http\Controllers\QuestionairesController;
+use App\Http\Controllers\SurveysController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +83,11 @@ Route::middleware('auth')->group(function () {
 
     Route::view('shop_subcategories', 'market.shop_subcategories.shop_subcategories')->name('market.shop_subcategories.shop_subcategories');
     
+    Route::view('compaigns', 'engagement.compaigns.compaigns')->name('engagement.compaigns.compaigns');
 
+    Route::view('questionaires', 'engagement.questionaires.questionaires')->name('engagement.questionaires.questionaires');
+
+    Route::view('surveys', 'engagement.surveys.surveys')->name('engagement.surveys.surveys');
 
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
@@ -158,6 +165,7 @@ Route::middleware('auth')->group(function () {
     Route::get('add_shop/{id}',[ShopController::class, 'add_shop']);
     Route::post('add_shop/store', [ShopController::class, 'store_shop']);
     Route::get('shop_category/change/{id}', [ShopController::class, 'change_category_shop']);
+    Route::get('add_shop/shop_category/change/{id}', [ShopController::class, 'change_category_shop']);
 
     Route::get('channels', [ChannelController::class, 'show_channels']);
     Route::get('channels/edit/{id}', [ChannelController::class, 'edit_channel']);
@@ -184,5 +192,22 @@ Route::middleware('auth')->group(function () {
     Route::get('user_roles', [UserroleController::class, 'show_user_roles']);
     Route::get('user_roles/edit/{id}', [UserroleController::class, 'edit_user_role']);
     Route::post('user_roles/store', [UserroleController::class, 'store']);
+    Route::delete('user_role/delete/{id}', [UserroleController::class, 'user_role_delete']);
+
+
+    Route::get('compaigns', [CompaignsController::class, 'show_compaigns']);
+    Route::get('compaign_edit/{id}', [CompaignsController::class, 'edit_compaign']);
+    Route::post('compaigns/store', [CompaignsController::class, 'compaign_store']);
+    Route::delete('delete_compaign/{id}', [CompaignsController::class, 'delete_compaign']);
+
+    Route::get('surveys', [SurveysController::class, 'show_surveys']);
+    Route::get('survey_edit/{id}', [SurveysController::class, 'edit_survey']);
+    Route::post('survey/store', [SurveysController::class, 'survey_store']);
+    Route::delete('delete_survey/{id}', [SurveysController::class, 'delete_survey']);
+
+    Route::get('questionaires', [QuestionairesController::class, 'show_questionaires']);
+    Route::get('questionaire_edit/{id}', [QuestionairesController::class, 'edit_questionaire']);
+    Route::post('questionaires/store', [QuestionairesController::class, 'store_questionaires']);
+    Route::delete('delete_questionaire/{id}', [QuestionairesController::class, 'delete_questionaire']);
 });
 

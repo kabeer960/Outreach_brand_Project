@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Region;
 use App\Models\Zone;
+use App\Http\Requests\RegionStoreRequest;
 
 class RegionsController extends Controller
 {
@@ -19,7 +20,7 @@ class RegionsController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(RegionStoreRequest $req){
         if($req->region_id !=''){
             $data =  Region::find($req->region_id);
 

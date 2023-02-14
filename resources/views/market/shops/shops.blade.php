@@ -49,7 +49,7 @@
                                 <td>{{$item->shop_description}}</td>
                                 <td>{{$item->shop_status}}</td>
                                 <td>
-                                    <a role="button" class="edit_btn" href="add_shop/{{$item->shop_id}}"><i class="ti ti-edit"></i></a>
+                                    <a role="button" class="edit_btn edit_icon_style" href="add_shop/{{$item->shop_id}}"><i class="ti ti-edit"></i></a>
                                     
                                 </td>
                             </tr>

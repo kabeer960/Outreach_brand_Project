@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('user_roles', function (Blueprint $table) {
-            $table->string('user_role_status')->after('user_role_description');
+        Schema::table('compaigns', function (Blueprint $table) {
+            $table->foreignId('survey_id')->references('survey_id')->on('surveys');
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('user_roles', function (Blueprint $table) {
+        Schema::table('compaigns', function (Blueprint $table) {
             //
         });
     }

@@ -40,8 +40,9 @@ class ShopController extends Controller
     }
 
     function store_shop(ShopStoreRequest $req){
-        if($req->shop_id !='')
-        $data = Shop::find($req->shop_id);    
+        if($req->shop_id !=''){
+        $data = Shop::find($req->shop_id); 
+        }   
         else{
             $data = new Shop();
         }

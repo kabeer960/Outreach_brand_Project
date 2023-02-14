@@ -11,7 +11,7 @@
             </div>
             <div class="col-lg-7"></div>
             <div class="col-lg-3">
-                <a class="btn btn-primary d-sm add_btn" style="float:right;">
+                <a class="btn btn-primary d-sm zone_add_btn" style="float:right;">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
                 Add New Zone
                 </a>
@@ -29,19 +29,18 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
-                        <div class="modal-body">
-                            <form class="form_store">
-                                
+                        <form class="zone_form_store">
+                            <div class="modal-body">
                                 @csrf
                                 <input type="hidden" name="zone_id" class="input_id"/>
                                 <div class="row mb-3">
                                     <div class="col-lg-6">
                                         <label class="form-label">Zone Code</label>
-                                        <input type="text" class="form-control input_code" name="zone_code" placeholder="Your Zone Code">
+                                        <input type="text" class="form-control input_code" name="zone_code" placeholder="Your Zone Code" required>
                                     </div>
                                     <div class="col-lg-6">
                                         <label class="form-label">Zone Name</label>
-                                        <input type="text" class="form-control input_name" name="zone_name" placeholder="Your Zone Name">
+                                        <input type="text" class="form-control input_name" name="zone_name" placeholder="Your Zone Name" required>
                                     </div>
                                 </div>
 
@@ -49,7 +48,7 @@
                                 <div class="row mb-3">
                                     <div class="col-lg-12">
                                         <label class="form-label">Zone Description</label>
-                                        <input type="text" class="form-control input_des" name="zone_description" placeholder="Your Zone Description">
+                                        <input type="text" class="form-control input_des" name="zone_description" placeholder="Your Zone Description" required>
                                     </div>
                                 </div>
 
@@ -57,7 +56,7 @@
                                     <div class="col-lg-12">
                                            
                                         <label class="form-label">City</label>
-                                        <select name="city_id" id="zone_name_id" class="form-select">
+                                        <select name="city_id" id="zone_name_id" class="form-select" required>
                                             @foreach($members as $member)
                                             <option value="{{$member->city_id}}">{{$member->city_name}}</option>
                                             @endforeach
@@ -70,33 +69,30 @@
                                     <div class="col-lg-12">
                                         <label class="form-label">Zone Status</label>
                                         <div class="form-check">
-                                            <input class="form-check-input zon_status_1" value="Active" type="radio" name="zone_status" id="">
+                                            <input class="form-check-input zone_status_1" value="Active" type="radio" name="zone_status" checked>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                     Active
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input zon_status_2" value="Non Active" type="radio" name="zone_status" id="">
+                                            <input class="form-check-input zone_status_2" value="Non Active" type="radio" name="zone_status">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Non Active
                                             </label>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                
-                            </form>
-                        </div>
-
-                        <div class="modal-footer">
-                            <a class="btn link-secondary" data-bs-dismiss="modal">Cancel</a>
-                            <a class="btn btn-primary ms-auto submit_btn" data-bs-dismiss="modal">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                            <span class="sub_html">Create new Zone</span>
-                            </a>
-                        </div>
-                        
-                        
+                            <div class="modal-footer">
+                                <a class="btn link-secondary" data-bs-dismiss="modal">Cancel</a>
+                                <button type="submit" class="btn btn-primary ms-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                                    <span class="sub_html">Create new Zone</span>
+                                </button>
+                            </div>
+                        </form>
+                         
                     </div>
                 </div>
             </div>
@@ -126,8 +122,8 @@
                                 <td>{{$item->city->city_name}}</td>
                                 <td>{{$item->zone_status}}</td>
                                 <td>
-                                    <a role="button" class="edit_btn" data-id="{{$item->zone_id}}"><i class="ti ti-edit"></i></a>
-                                    <a role="button" class="del_btn" data-id="{{$item->zone_id}}"><i class="ti ti-basket" ></i></a>
+                                    <a role="button" class="zone_edit_btn edit_icon_style" data-id="{{$item->zone_id}}"><i class="ti ti-edit"></i></a>
+                                    <a role="button" class="zone_del_btn del_icon_style" data-id="{{$item->zone_id}}"><i class="ti ti-basket" ></i></a>
                                 </td>
                             </tr>
                             
@@ -141,94 +137,4 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#myTable').DataTable();
-            
-        })
-
-        $('body').on('click', '.add_btn', function(){
-            $('.zon_status_1').attr('checked', null); 
-            $('.zon_status_2').attr('checked', null); 
-            $('.form_store').trigger('reset');
-            $(".input_id[type=hidden]").val('');
-            $('.modal-title').html('Add New Zone')
-            $('.sub_html').html('Add New Zone');
-            $('#modal').modal('show');
-        })
-
-        $('body').on('click', '.edit_btn', function(){
-            $('.form_store').trigger('reset');
-            $('.modal-title').html('Edit Zone')
-            $('.sub_html').html('Update');
-            $('#modal').modal('show');
-            var id = $(this).data('id');
-          
-            $.ajax({
-                url: 'zones/edit/'+id
-                
-            }).done(function(res){
-                $('.input_id').val(res.zone_id);
-                $('.input_code').val(res.zone_code);
-                $('.input_name').val(res.zone_name);
-                $('.input_des').val(res.zone_description);
-                $('#zone_name_id').val(res.city.city_id);
-                if(res.zone_status == 'Active'){
-                    $('.zon_status_1').attr('checked', 'checked');  
-                        
-                    $('.zon_status_2').attr('checked', null); 
-                }else{
-                    $('.zon_status_2').attr('checked', 'checked'); 
-                        
-                    $('.zon_status_1').attr('checked', null); 
-                }
-            })
-
-        })
-
-            $('body').on('click', '.submit_btn', function(e){
-                e.preventDefault();
-              
-                $.ajax({
-                    url: 'zones/store',
-                    data: $('.form_store').serialize(),
-                    type: 'POST'
-                }).done(function(res){
-                  
-                    var row = '<tr class="row_table_'+res.zone_id+'">';
-                    row += '<td>'+res.zone_id+ '</td>';
-                    row += '<td>'+res.zone_code+ '</td>';
-                    row += '<td>'+res.zone_name+'</td>';
-                    row += '<td>'+res.zone_description+'</td>';
-                    row += '<td>'+res.city.city_name+'</td>';
-                    row += '<td>'+res.zone_status+'</td>';
-                    row += '<td><a role="button" id="edit_btn" class="edit_btn" data-id="'+res.zone_id+'"><i class="ti ti-edit"></i></a><a role="button" class="del_btn" style="margin-left:4px;" id="del_btn" data-id="'+res.zone_id+'"><i class="ti ti-basket"></i></a></td>';
-                    if($('.input_id').val()!=''){
-                        $('.row_table_'+res.zone_id).replaceWith(row);
-                    }else{
-                        $('.list_table').prepend(row);
-                    }
-
-                    $('.form_store').trigger('reset');
-                    $('#modal').modal('hide');
-                })
-            })
-
-
-            $('body').on('click', '.del_btn', function(){
-                var id = $(this).data('id');
-                $.ajax({
-                    headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: 'zones/delete/'+id,
-                        type: 'DELETE'
-                }).done(function(res){
-                    $('.row_table_'+res.zone_id).remove();
-                });
-            })
-
-            
-
-        </script>
 @endsection

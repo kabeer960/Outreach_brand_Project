@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Shopclass;
+use App\Http\Requests\ClassStoreRequest;
 class ShopClassesController extends Controller
 {
     function show_classes(){
@@ -16,7 +17,7 @@ class ShopClassesController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(ClassStoreRequest $req){
         if($req->class_id != ''){
             $data = Shopclass::find($req->class_id);
         }else{

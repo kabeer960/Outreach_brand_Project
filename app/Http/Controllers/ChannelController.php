@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Channel;
+use App\Http\Requests\ChannelStoreRequest;
 
 class ChannelController extends Controller
 {
@@ -17,7 +18,7 @@ class ChannelController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(ChannelStoreRequest $req){
         if($req->channel_id != ''){
             $data = Channel::find($req->channel_id);
         }else{

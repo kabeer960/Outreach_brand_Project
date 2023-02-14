@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shopsubcategory;
 use App\Models\Shopcategory;
+use App\Http\Requests\ShopsubcategoryStoreRequest;
 
 class ShopsubcategoryController extends Controller
 {
@@ -19,7 +20,7 @@ class ShopsubcategoryController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(ShopsubcategoryStoreRequest $req){
         if($req->shop_subcategory_id != ''){
             $data = Shopsubcategory::find($req->shop_subcategory_id);
         }else{

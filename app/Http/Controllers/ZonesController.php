@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Zone;
 use App\Models\City;
+use App\Http\Requests\ZoneStoreRequest;
 
 class ZonesController extends Controller
 {
@@ -20,7 +21,7 @@ class ZonesController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(ZoneStoreRequest $req){
         if($req->zone_id !=''){
             $data =  Zone::find($req->zone_id);
 

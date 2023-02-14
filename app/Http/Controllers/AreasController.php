@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Area;
 use App\Models\Region;
+use App\Http\Requests\AreaStoreRequest;
 
 
 class AreasController extends Controller
@@ -20,7 +21,7 @@ class AreasController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(AreaStoreRequest $req){
         if($req->area_id !=''){
             $data =  Area::find($req->area_id);
 

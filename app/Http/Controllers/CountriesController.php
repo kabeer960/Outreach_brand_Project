@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Country;
+use App\Http\Requests\CountryStoreRequest;
 
 class CountriesController extends Controller
 {
@@ -17,7 +18,7 @@ class CountriesController extends Controller
         return response()->json($data);
     }
 
-    function store_country(Request $req){
+    function store_country(CountryStoreRequest $req){
         if($req->country_id !=''){
             $data = Country::find($req->country_id);
         }else{

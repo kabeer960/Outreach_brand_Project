@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Town;
 use App\Models\Area;
+use App\Http\Requests\TownStoreRequest;
 
 class TownsController extends Controller
 {
@@ -19,7 +20,7 @@ class TownsController extends Controller
         return response()->json($data);
     }
 
-    function store(Request $req){
+    function store(TownStoreRequest $req){
         if($req->town_id !=''){
             $data =  Town::find($req->town_id);
 
