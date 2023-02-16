@@ -14,6 +14,7 @@ class QuestionairesStoreRequest extends FormRequest
             'question_name' => ['required', 'string', 'max:255'],
             'question_description' => ['required', 'string'],
             'question_status' => ['required'],
+            'survey_id' => ['required'],
         ];
     }
 }

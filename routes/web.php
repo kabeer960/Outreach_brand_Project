@@ -22,6 +22,7 @@ use App\Http\Controllers\UserroleController;
 use App\Http\Controllers\CompaignsController;
 use App\Http\Controllers\QuestionairesController;
 use App\Http\Controllers\SurveysController;
+use App\Http\Controllers\ExcelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,17 +90,18 @@ Route::middleware('auth')->group(function () {
 
     Route::view('surveys', 'engagement.surveys.surveys')->name('engagement.surveys.surveys');
 
+   
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
-
-    Route::get('companies', [CompaniesController::class, 'show_companies']);//show company controller class
-    Route::get('companies/{id}', [CompaniesController::class, 'edit_company']);//edit company controller class
-    Route::post('companies/store', [CompaniesController::class, 'store']);//update company data controller class
-    Route::delete('companies/delete/{id}', [CompaniesController::class, 'delete']);//delete company controller class
-
+    Route::group(['prefix'=>'companies','as'=>'company.'],function () {
+        Route::get('/', [CompaniesController::class, 'show_companies']);//show company controller class
+        Route::get('{id}', [CompaniesController::class, 'edit_company']);//edit company controller class
+        Route::post('store', [CompaniesController::class, 'store']);//update company data controller class
+        Route::delete('delete/{id}', [CompaniesController::class, 'delete']);//delete company controller class
+    });
     Route::get('clients', [ClientController::class, 'show_clients']);//show clients controller class
     Route::get('clients/edit/{id}', [ClientController::class, 'edit_client']);//edit client controller class
     Route::post('clients/store', [ClientController::class, 'store_client']);//update client controller class
@@ -205,9 +207,12 @@ Route::middleware('auth')->group(function () {
     Route::post('survey/store', [SurveysController::class, 'survey_store']);
     Route::delete('delete_survey/{id}', [SurveysController::class, 'delete_survey']);
 
-    Route::get('questionaires', [QuestionairesController::class, 'show_questionaires']);
+    Route::get('questionaires/{id}', [QuestionairesController::class, 'show_questionaires']);
     Route::get('questionaire_edit/{id}', [QuestionairesController::class, 'edit_questionaire']);
     Route::post('questionaires/store', [QuestionairesController::class, 'store_questionaires']);
     Route::delete('delete_questionaire/{id}', [QuestionairesController::class, 'delete_questionaire']);
+
+    Route::get('export', [CompaniesController::class, 'export'])->name('export');
+    Route::post('import', [CompaniesController::class, 'import'])->name('import');
 });
 

@@ -9,7 +9,10 @@ class Survey extends Model
 {
     use HasFactory;
     protected $primaryKey = 'survey_id';
-    function questionaire(){
-        return  $this->belongsTo(questionaire::class,'question_id');
+    function compaign(){
+        return  $this->belongsTo(Compaign::class,'compaign_id');
     }
+   function questionaire(){
+        return $this->hasMany(Questionaire::class,'survey_id');
+   }
 }

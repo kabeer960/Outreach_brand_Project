@@ -13,7 +13,7 @@ class SurveyStoreRequest extends FormRequest
             'survey_name' => ['required', 'string', 'max:255'],
             'survey_description' => ['required', 'string'],
             'survey_status' => ['required'],
-            'question_id' => ['required'],
+            'compaign_id' => ['required'],
         ];
     }
 }

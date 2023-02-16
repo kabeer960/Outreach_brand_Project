@@ -9,4 +9,7 @@ class Questionaire extends Model
 {
     use HasFactory;
     protected $primaryKey = 'question_id';
+    function survey(){
+        return  $this->belongsTo(Survey::class,'survey_id');
+    }
 }

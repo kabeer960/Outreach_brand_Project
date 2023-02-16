@@ -1507,7 +1507,6 @@ $('body').on('click', '.compaign_edit_btn', function(){
         $('.input_com_start_date').val(res.compaign_start_date);
         $('.input_com_end_date').val(res.compaign_end_date);
         $('.input_des').val(res.compaign_description);
-        $('.compaign_name_id').val(res.survey.survey_id);
         if(res.compaign_status == 'Active'){
             $('.compaign_status_1').attr('checked', 'checked');
             $('.compaign_status_2').attr('checked', null);
@@ -1534,7 +1533,6 @@ $('body').on('submit', '.compaign_form_store', function(e){
         row += '<td>'+res.compaign_start_date+'</td>';
         row += '<td>'+res.compaign_end_date+'</td>';
         row += '<td>'+res.compaign_status+'</td>';
-        row += '<td>'+res.survey.survey_name+'</td>';
         row += '<td><a role="button" class="compaign_edit_btn edit_icon_style" data-id="'+res.compaign_id+'"><i class="ti ti-edit"></i></a><a role="button" class="compaign_del_btn del_icon_style" style="margin-left:4px;" id="del_btn" data-id="'+res.compaign_id+'"><i class="ti ti-basket"></i></a></td>';
         if($('.input_id').val()!=''){
             $('.row_table_'+res.compaign_id).replaceWith(row);
@@ -1571,8 +1569,8 @@ Surveys page code -----------------Start---------
 //Surveys Add modal code --------Start------
 $('body').on('click', '.surveys_add_btn', function(){
     $('.surveys_form_store').trigger('reset');
-    $('.surveys__status_1').attr('checked', 'checked'); 
-    $('.surveys__status_2').attr('checked', null); 
+    $('.survey_status_1').attr('checked', 'checked'); 
+    $('.survey_status_2').attr('checked', null); 
     $(".input_id[type=hidden]").val('');
     $('.modal-title').html('Add New Survey')
     $('.sub_html').html('Add New Survey');
@@ -1594,7 +1592,7 @@ $('body').on('click', '.surveys_edit_btn', function(){
         $('.input_code').val(res.survey_code);
         $('.input_name').val(res.survey_name);
         $('.input_des').val(res.survey_description);
-        $('.survey_name_id').val(res.questionaire.question_id);
+        $('.survey_name_id').val(res.compaign.compaign_id);
         if(res.survey_status == 'Active'){
             $('.survey_status_1').attr('checked', 'checked');
             $('.survey_status_2').attr('checked', null);
@@ -1618,7 +1616,7 @@ $('body').on('submit', '.surveys_form_store', function(e){
         row += '<td>'+res.survey_code+ '</td>';
         row += '<td>'+res.survey_name+'</td>';
         row += '<td>'+res.survey_description+'</td>';
-        row += '<td>'+res.questionaire.question_name+'</td>';
+        row += '<td>'+res.compaign.compaign_name+'</td>';
         row += '<td>'+res.survey_status+'</td>';
         row += '<td><a role="button" class="surveys_edit_btn edit_icon_style" data-id="'+res.survey_id+'"><i class="ti ti-edit"></i></a><a role="button" class="surveys_del_btn del_icon_style" style="margin-left:4px;" id="del_btn" data-id="'+res.survey_id+'"><i class="ti ti-basket"></i></a></td>';
         if($('.input_id').val()!=''){
@@ -1680,6 +1678,7 @@ $('body').on('click', '.questionaires_edit_btn', function(){
         $('.input_code').val(res.question_code);
         $('.input_name').val(res.question_name);
         $('.input_des').val(res.question_description);
+        $('.question_name_id').val(res.survey.survey_id);
         if(res.question_status == 'Active'){
             $('.questionaires_status_1').attr('checked', 'checked');
             $('.questionaires_status_2').attr('checked', null);
@@ -1704,6 +1703,7 @@ $('body').on('submit', '.questionaires_form_store', function(e){
         row += '<td>'+res.question_name+'</td>';
         row += '<td>'+res.question_description+'</td>';
         row += '<td>'+res.question_status+'</td>';
+        row += '<td>'+res.survey.survey_name+'</td>';
         row += '<td><a role="button" class="questionaires_edit_btn edit_icon_style" data-id="'+res.question_id+'"><i class="ti ti-edit"></i></a><a role="button" class="questionaires_del_btn del_icon_style" style="margin-left:4px;" id="del_btn" data-id="'+res.question_id+'"><i class="ti ti-basket"></i></a></td>';
         if($('.input_id').val()!=''){
             $('.row_table_'+res.question_id).replaceWith(row);
@@ -1733,6 +1733,12 @@ $('body').on('click', '.questionaires_del_btn', function(){
 /*
 Questionaires page code -----------------End---------
 */
+
+$('#import_btn').on('click',  function(){
+    $('#modal_import').modal('show');
+});
+
+
 
 
 

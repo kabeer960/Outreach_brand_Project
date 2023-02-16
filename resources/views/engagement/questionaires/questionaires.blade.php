@@ -39,6 +39,7 @@
                                 </div>
                             </div>
 
+
                             <div class="row mb-3">
                                 <div class="col-lg-8">
                                     <label class="form-label">Question Description</label>
@@ -92,6 +93,7 @@
                             <th scope="col">Question Name</th>
                             <th scope="col">Question Description</th>
                             <th scope="col">Question Status</th>
+                            <th scope="col">Survey Name</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -104,6 +106,7 @@
                             <td>{{$item->question_name}}</td>
                             <td>{{$item->question_description}}</td>
                             <td>{{$item->question_status}}</td>
+                            <td>{{$item->survey->survey_name}}</td>
                             <td>
                                 <a role="button" id="edit_btn" class="questionaires_edit_btn edit_icon_style" data-id="{{$item->question_id}}"><i class="ti ti-edit"></i></a>
                                 <a role="button" id="del_btn" class="questionaires_del_btn del_icon_style" data-id="{{$item->question_id}}"><i class="ti ti-basket"></i></a>

@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Http\Requests\CompanyStoreRequest;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class CompaniesController extends Controller
 {
+    
+    function export(){
+        return Excel::download(new Company, 'company.xlsx');
+    }   
+
+    function import(){
+        Excel::import(new Company, request()->file('file'));
+        return back();
+    }
+
     function show_companies(){
         $data = Company::all();
         return view('masterdata.companies.companies', ['items' => $data]);

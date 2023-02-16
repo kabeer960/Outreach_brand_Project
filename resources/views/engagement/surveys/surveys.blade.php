@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mt-4">
             <div class="col-lg-3">
-                <h2>{{ __('Questionaires Page') }}</h2>   
+                <h2>{{ __('Surveys Page') }}</h2>   
             </div>
             <div class="col-lg-6"></div>
             <div class="col-lg-3">
@@ -41,10 +41,10 @@
 
                             <div class="row mb-3">
                                 <div class="col-lg-12">
-                                    <label class="form-label">Question Name</label>
-                                    <select name="question_id" id="survey_name_id" class="survey_name_id form-select" required>
+                                    <label class="form-label">Compaign Name</label>
+                                    <select name="compaign_id" id="survey_name_id" class="survey_name_id form-select" required>
                                         @foreach($members as $member)
-                                        <option value="{{$member->question_id}}">{{$member->question_name}}</option>
+                                        <option value="{{$member->compaign_id}}">{{$member->compaign_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -103,7 +103,7 @@
                             <th scope="col">Survey Code</th>
                             <th scope="col">Survey Name</th>
                             <th scope="col">Survey Description</th>
-                            <th scope="col">Question Name</th>
+                            <th scope="col">Compaign Name</th>
                             <th scope="col">Survey Status</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -116,11 +116,12 @@
                             <td>{{$item->survey_code}}</td>
                             <td>{{$item->survey_name}}</td>
                             <td>{{$item->survey_description}}</td>
-                            <td>{{$item->questionaire->question_name}}</td>
+                            <td>{{$item->compaign->compaign_name}}</td>
                             <td>{{$item->survey_status}}</td>
                             <td>
                                 <a role="button" id="edit_btn" class="surveys_edit_btn edit_icon_style" data-id="{{$item->survey_id}}"><i class="ti ti-edit"></i></a>
                                 <a role="button" id="del_btn" class="surveys_del_btn del_icon_style" data-id="{{$item->survey_id}}"><i class="ti ti-basket"></i></a>
+                                <a href="questionaires/{{$item->survey_id}}" data-id="{{$item->survey_id}}">Add Question</a>
                             </td>
                         </tr>    
                         @endforeach

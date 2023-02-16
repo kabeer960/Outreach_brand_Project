@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('compaigns', function (Blueprint $table) {
-            $table->foreignId('survey_id')->references('survey_id')->on('surveys');
+        Schema::table('questionaires', function (Blueprint $table) {
+            $table->foreignId('survey_id')->references('survey_id')->on('surveys')->after('question_status');
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('compaigns', function (Blueprint $table) {
+        Schema::table('questionaires', function (Blueprint $table) {
             //
         });
     }

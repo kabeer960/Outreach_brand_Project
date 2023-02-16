@@ -9,7 +9,4 @@ class Compaign extends Model
 {
     use HasFactory;
     protected $primaryKey = 'compaign_id';
-    function survey(){
-        return  $this->belongsTo(Survey::class,'survey_id');
-    }
 }

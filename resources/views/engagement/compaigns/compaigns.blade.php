@@ -73,17 +73,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                
-                                <div class="row mb-3">
-                                <div class="col-lg-12">
-                                    <label class="form-label">Survey Name</label>
-                                    <select name="survey_id" id="compaign_name_id" class="compaign_name_id form-select" required>
-                                        @foreach($members as $member)
-                                        <option value="{{$member->survey_id}}">{{$member->survey_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                               
                             </div>
 
                         </div>
@@ -117,7 +107,6 @@
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
                             <th scope="col">Compaign Status</th>
-                            <th scope="col">Survey Name</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -132,7 +121,6 @@
                             <td>{{$item->compaign_start_date}}</td>
                             <td>{{$item->compaign_end_date}}</td>
                             <td>{{$item->compaign_status}}</td>
-                            <td>{{$item->survey->survey_name}}</td>
                             <td>
                                 <a role="button" id="edit_btn" class="compaign_edit_btn edit_icon_style" data-id="{{$item->compaign_id}}"><i class="ti ti-edit"></i></a>
                                 <a role="button" id="del_btn" class="compaign_del_btn del_icon_style" data-id="{{$item->compaign_id}}"><i class="ti ti-basket"></i></a>

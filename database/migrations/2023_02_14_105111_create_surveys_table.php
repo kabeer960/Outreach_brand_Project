@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('survey_name');
             $table->string('survey_description');
             $table->string('survey_status');
-            $table->foreignId('question_id')->references('question_id')->on('questionaires');
+            $table->foreignId('compaign_id')->references('compaign_id')->on('compaigns');
             $table->timestamps();
         });
     }

@@ -29,10 +29,10 @@
 			<header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-lg-1 mt-2">
+						<div class="col-lg-2">
 							<a href=""><img src="{{ url('img/logo_outreach.png') }}" class="img-fluid"></a>
 						</div>
-						<div class="col-lg-9">	
+						<div class="col-lg-8">	
 							<ul class="navbar-nav  app_ul_set">
 								
 								<li class="nav-item @if(request()->routeIs('home')) active @endif">
@@ -188,30 +188,6 @@
 								</li>
 
 
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-										<i class="ti ti-flame nav_icon_set"></i>
-										<span class="nav-link-title">
-											Products
-										</span>
-									</a>
-									<div class="dropdown-menu">
-										<div class="dropdown-menu-columns">
-											<div class="dropdown-menu-column">
-												<a class="dropdown-item" href="/products" >
-													Products
-												</a>
-												<a class="dropdown-item" href="/categories" >
-													Category
-												</a>
-												<a class="dropdown-item" href="/subcategories" >
-													Subcategory
-												</a>
-
-											</div>
-										</div>
-									</div>
-								</li>
 
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
@@ -231,11 +207,6 @@
 												<a class="dropdown-item" href="/surveys" >
 													Surveys
 												</a>
-
-												<a class="dropdown-item" href="/questionaires" >
-													Questionaires
-												</a>
-
 											</div>
 										</div>
 									</div>
