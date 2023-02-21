@@ -121,7 +121,7 @@
                             <td>
                                 <a role="button" id="edit_btn" class="surveys_edit_btn edit_icon_style" data-id="{{$item->survey_id}}"><i class="ti ti-edit"></i></a>
                                 <a role="button" id="del_btn" class="surveys_del_btn del_icon_style" data-id="{{$item->survey_id}}"><i class="ti ti-basket"></i></a>
-                                <a href="questionaires/{{$item->survey_id}}" data-id="{{$item->survey_id}}">Add Question</a>
+                                <a class="btn" href="questionaires/{{$item->survey_id}}" data-id="{{$item->survey_id}}">Add Question</a>
                             </td>
                         </tr>    
                         @endforeach

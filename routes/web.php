@@ -23,6 +23,7 @@ use App\Http\Controllers\CompaignsController;
 use App\Http\Controllers\QuestionairesController;
 use App\Http\Controllers\SurveysController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\AnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,7 @@ Route::middleware('auth')->group(function () {
 
     Route::view('surveys', 'engagement.surveys.surveys')->name('engagement.surveys.surveys');
 
+    Route::view('answers', 'engagement.answers.answers');
    
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
@@ -208,11 +210,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('delete_survey/{id}', [SurveysController::class, 'delete_survey']);
 
     Route::get('questionaires/{id}', [QuestionairesController::class, 'show_questionaires']);
-    Route::get('questionaire_edit/{id}', [QuestionairesController::class, 'edit_questionaire']);
+    Route::get('questionaires/edit/{id}', [QuestionairesController::class, 'edit_questionaire']);
     Route::post('questionaires/store', [QuestionairesController::class, 'store_questionaires']);
-    Route::delete('delete_questionaire/{id}', [QuestionairesController::class, 'delete_questionaire']);
+    Route::delete('questionaires/delete/{id}', [QuestionairesController::class, 'delete_questionaire']);
 
     Route::get('export', [CompaniesController::class, 'export'])->name('export');
     Route::post('import', [CompaniesController::class, 'import'])->name('import');
+
+    Route::get('questionaires/answers/{id}',[AnswerController::class, 'show_answers']);
+    Route::get('questionaires/answers/edit/{id}', [AnswerController::class, 'edit_answer']);
+    Route::post('questionaires/answers/store', [AnswerController::class, 'store']);
+    Route::delete('questionaires/answers/delete/{id}', [AnswerController::class, 'delete_answer']);
 });
 

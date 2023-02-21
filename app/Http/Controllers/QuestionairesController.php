@@ -11,7 +11,7 @@ class QuestionairesController extends Controller
 {
     function show_questionaires($sid){
         $data = Survey::find($sid)->questionaire;
-        return view('engagement.questionaires.questionaires', ['items' => $data]);
+        return view('engagement.questionaires.questionaires', ['items' => $data, 'sid' => $sid]);
     }
 
     function edit_questionaire($que_id){
@@ -31,6 +31,7 @@ class QuestionairesController extends Controller
         $data->question_description = $req->question_description;
         $data->question_status = $req->question_status;
         $data->survey_id = $req->survey_id;
+        $data->question_type = $req->question_type;
         $data->save();
         $sdata = questionaire::with('survey')->find($data->question_id);
         return response()->json($sdata);

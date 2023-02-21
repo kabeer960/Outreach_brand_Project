@@ -12,4 +12,8 @@ class Questionaire extends Model
     function survey(){
         return  $this->belongsTo(Survey::class,'survey_id');
     }
+
+    function answer(){
+        return $this->hasMany(Answer::class, 'question_id');
+    }
 }

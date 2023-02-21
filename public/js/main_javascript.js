@@ -1653,16 +1653,7 @@ Survey Page code ----------------End----------
 Questionaires page code -----------------Start---------
 */
 //Questionairs add modal code --------Start------
-$('body').on('click', '.questionaires_add_btn', function(){
-    $('.questionaires_form_store').trigger('reset');
-    $('.questionaires_status_1').attr('checked', 'checked'); 
-    $('.questionaires_status_2').attr('checked', null); 
-    $(".input_id[type=hidden]").val('');
-    $('.modal-title').html('Add New Question')
-    $('.sub_html').html('Add New Question');
-    $('#modal').modal('show');
-    
-});
+
 //Questionairs add modal code --------End------
 //Questionairs edit modal code --------Start------
 $('body').on('click', '.questionaires_edit_btn', function(){
@@ -1672,13 +1663,14 @@ $('body').on('click', '.questionaires_edit_btn', function(){
     $('#modal').modal('show');
     var id = $(this).data('id');
     $.ajax({
-        url: 'questionaire_edit/'+id
+        url: 'edit/'+id
     }).done(function(res){
         $('.input_id').val(res.question_id);
         $('.input_code').val(res.question_code);
         $('.input_name').val(res.question_name);
         $('.input_des').val(res.question_description);
         $('.question_name_id').val(res.survey.survey_id);
+        $('.questionaire_type').val(res.question_type);
         if(res.question_status == 'Active'){
             $('.questionaires_status_1').attr('checked', 'checked');
             $('.questionaires_status_2').attr('checked', null);
@@ -1686,14 +1678,16 @@ $('body').on('click', '.questionaires_edit_btn', function(){
             $('.questionaires_status_2').attr('checked', 'checked');
             $('.questionaires_status_1').attr('checked', null);
         }
+        
     });
+   
 });
 //Questionairs edit modal code --------End------
 //Questionairs store modal code --------Start------
 $('body').on('submit', '.questionaires_form_store', function(e){
     e.preventDefault();
     $.ajax({
-        url: 'questionaires/store',
+        url: 'store',
         data: $('.questionaires_form_store').serialize(),
         type: 'POST'
     }).done(function(res){
@@ -1704,7 +1698,8 @@ $('body').on('submit', '.questionaires_form_store', function(e){
         row += '<td>'+res.question_description+'</td>';
         row += '<td>'+res.question_status+'</td>';
         row += '<td>'+res.survey.survey_name+'</td>';
-        row += '<td><a role="button" class="questionaires_edit_btn edit_icon_style" data-id="'+res.question_id+'"><i class="ti ti-edit"></i></a><a role="button" class="questionaires_del_btn del_icon_style" style="margin-left:4px;" id="del_btn" data-id="'+res.question_id+'"><i class="ti ti-basket"></i></a></td>';
+        row += '<td>'+res.question_type+'</td>';
+        row += '<td><a role="button" class="questionaires_edit_btn edit_icon_style" data-id="'+res.question_id+'"><i class="ti ti-edit"></i></a><a role="button" class="questionaires_del_btn del_icon_style" style="margin-left:4px;" id="del_btn" data-id="'+res.question_id+'"><i class="ti ti-basket"></i></a><a class="btn btn-sm btn-success" href="answers/'+res.question_id+'">Add Answers</a></td>';
         if($('.input_id').val()!=''){
             $('.row_table_'+res.question_id).replaceWith(row);
         }else{
@@ -1712,8 +1707,10 @@ $('body').on('submit', '.questionaires_form_store', function(e){
         }
 
     });
-    $('.questionaores_form_store').trigger('reset');
-    $('#modal').modal('hide');
+    $('.questionaires_form_store').trigger('reset');
+    $('.questionaires_status_1').attr('checked', 'checked'); 
+    $('.questionaires_status_2').attr('checked', null); 
+    $('.sub_html').html('Add');
 });
 //Questionairs store modal code --------End------
 //Questionairs delete modal code --------Start------
@@ -1723,7 +1720,7 @@ $('body').on('click', '.questionaires_del_btn', function(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: 'delete_questionaire/'+id,
+        url: 'delete/'+id,
         type: 'DELETE'
     }).done(function(res){
         $('.row_table_'+res.question_id).remove();
@@ -1739,6 +1736,89 @@ $('#import_btn').on('click',  function(){
 });
 
 
+/*
+Answers page code -----------------Start---------
+*/
+//Answer edit modal code --------Start------
+$('body').on('click', '.answers_edit_btn', function(){
+    $('.answers_form_store').trigger('reset');
+    $('.modal-title').html('Edit Answer');
+    $('.sub_html').html('Update Answer');
+    $('#modal').modal('show');
+    var id = $(this).data('id');
+    $.ajax({
+        url: 'edit/'+id
+    }).done(function(res){
+        $('.input_id').val(res.answer_id);
+        $('.input_code').val(res.answer_code);
+        $('.input_body').val(res.answer_body);
+        $('.input_des').val(res.answer_description);
+        if(res.answer_condition == '1'){
+            $('.input_condition').attr('checked', 'checked');
+        }else{
+            $('.input_condition').attr('checked', null);
+        }
+        
+        if(res.answer_status == 'Active'){
+            $('.answers_status_1').attr('checked', 'checked');
+            $('.answers_status_2').attr('checked', null);
+        }else{
+            $('.answers_status_2').attr('checked', 'checked');
+            $('.answers_status_1').attr('checked', null);
+        }
+        
+    });
+   
+});
+//Answer edit modal code --------End------
+//Answer store modal code --------Start------
+$('body').on('submit', '.answers_form_store', function(e){
+    e.preventDefault();
+    $.ajax({
+        url: 'store',
+        data: $('.answers_form_store').serialize(),
+        type: 'POST'
+    }).done(function(res){
+        var row = '<tr class="row_table_'+res.answer_id+'">';
+        row += '<td>'+res.answer_id+ '</td>';
+        row += '<td>'+res.answer_code+ '</td>';
+        row += '<td>'+res.answer_body+'</td>';
+        row += '<td>'+res.answer_description+'</td>';
+        row += '<td>'+res.answer_status+'</td>';
+        row += '<td>'+res.questionaire.question_name+'</td>';
+        if(res.questionaire.question_type == 'Multiple'){
+            if(res.answer_condition == 0){
+                row += '<td class="text-danger">Worng</td>';
+            }else if(res.answer_condition == 1){
+                row += '<td class="text-success">Correct</td>';
+            }
+        }
+        
+        row += '<td><a role="button" class="answers_edit_btn edit_icon_style" data-id="'+res.answer_id+'"><i class="ti ti-edit"></i></a><a role="button" class="answers_del_btn del_icon_style" style="margin-left:4px;" id="del_btn" data-id="'+res.answer_id+'"><i class="ti ti-basket"></i></a></td>';
+        if($('.input_id').val()!=''){
+            $('.row_table_'+res.answer_id).replaceWith(row);
+        }else{
+            $('.list_table').prepend(row);
+        }
 
+    });
+    $('.answers_form_store').trigger('reset');
+    $('.answers_status_1').attr('checked', 'checked'); 
+    $('.answers_status_2').attr('checked', null); 
+    $('.sub_html').html('Add');
+});
 
-
+//Answer store modal code --------End------
+//Answer delete modal code --------Start------
+$('body').on('click', '.answers_del_btn', function(){
+    var id = $(this).data('id');
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: 'delete/'+id,
+        type: 'DELETE'
+    }).done(function(res){
+        $('.row_table_'+res.answer_id).remove();
+    });
+});
